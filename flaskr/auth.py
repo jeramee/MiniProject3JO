@@ -1,5 +1,4 @@
 import functools
-
 from flask import Blueprint
 from flask import flash
 from flask import g
@@ -14,6 +13,7 @@ from werkzeug.security import generate_password_hash
 from flaskr.db import get_db
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
+'''bp = Blueprint("blog", __name__, template_folder='templates')'''
 
 
 def login_required(view):

@@ -6,7 +6,7 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from werkzeug.exceptions import abort
-
+from flask_sqlalchemy import SQLAlchemy
 from flaskr.auth import login_required
 from flaskr.db import get_db
 
@@ -23,6 +23,46 @@ def index():
         " ORDER BY created DESC"
     ).fetchall()
     return render_template("blog/index.html", posts=posts)
+
+
+@bp.route('/page1', methods=['GET', 'POST'])
+def page1():
+    if request.method == 'POST':
+        return render_template('blog/page1.html', response=None)
+    else:
+        return render_template('blog/page1.html', response=None)
+
+
+@bp.route('/page2', methods=['GET', 'POST'])
+def page2():
+    if request.method == 'POST':
+        return render_template('blog/page2.html', response=None)
+    else:
+        return render_template('blog/page2.html', response=None)
+
+
+@bp.route('/page3', methods=['GET', 'POST'])
+def page3():
+    if request.method == 'POST':
+        return render_template('blog/page3.html', response=None)
+    else:
+        return render_template('blog/page3.html', response=None)
+
+
+@bp.route('/page4', methods=['GET', 'POST'])
+def page4():
+    if request.method == 'POST':
+        return render_template('blog/page4.html', response=None)
+    else:
+        return render_template('blog/page4.html', response=None)
+
+
+@bp.route('/page5', methods=['GET', 'POST'])
+def page5():
+    if request.method == 'POST':
+        return render_template('blog/page5.html', response=None)
+    else:
+        return render_template('blog/page5.html', response=None)
 
 
 def get_post(id, check_author=True):

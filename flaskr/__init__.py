@@ -1,5 +1,4 @@
 import os
-
 from flask import Flask
 
 
@@ -26,18 +25,12 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route("/hello")
-    def hello():
-        return "Hello, World!"
-
     # register the database commands
     from flaskr import db
-
     db.init_app(app)
 
     # apply the blueprints to the app
     from flaskr import auth, blog
-
     app.register_blueprint(auth.bp)
     app.register_blueprint(blog.bp)
 
@@ -48,3 +41,10 @@ def create_app(test_config=None):
     app.add_url_rule("/", endpoint="index")
 
     return app
+
+
+if __name__ == "__main__":
+    application = create_app()
+    application.run(debug=True)
+    from waitress import serve
+    serve(application, host="0.0.0.0", port=8080)

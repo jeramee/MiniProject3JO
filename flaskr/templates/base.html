@@ -1,24 +1,50 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - Flaskr</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
-  <h1><a href="{{ url_for('index') }}">Flaskr</a></h1>
-  <ul>
-    {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
-    {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
-    {% endif %}
-  </ul>
-</nav>
-<section class="content">
-  <header>
-    {% block header %}{% endblock %}
-  </header>
-  {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-  {% endfor %}
-  {% block content %}{% endblock %}
-</section>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - WhoStole_MyDonuts</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css?h=f9b50ef9fae3fd6dd71d14c05da626ca">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="/static/css/styles.min.css?h=0bb8506450ace869e4d4dc22c341a0ff">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand bg-light navigation-clean navbar-light">
+      <div class="container">
+        <div class="d-flex justify-content-between w-100">
+          <a class="navbar-brand" href="#">Want to chat with Fernanda!</a>
+          <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+          <nav>
+            <h1><a href="{{ url_for('blog.index') }}">Flaskr</a></h1>
+            <ul>
+              {% if g.user %}
+                <li><span>{{ g.user['username'] }}</span>
+                <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+              {% else %}
+                <li><a href="{{ url_for('auth.register') }}">Register</a>
+                <li><a href="{{ url_for('auth.login') }}">Log In</a>
+              {% endif %}
+              <li><a href="{{ url_for('blog.index') }}">Home</a></li>
+              <li><a href="{{ url_for('blog.page1') }}">Page1</a></li>
+              <li><a href="{{ url_for('blog.page2') }}">Page2</a></li>
+              <li><a href="{{ url_for('blog.page3') }}">Page3</a></li>
+              <li><a href="{{ url_for('blog.page4') }}">Page4</a></li>
+              <li><a href="{{ url_for('blog.page5') }}">Page5</a></li>
+            </ul>
+          </nav>
+          <section class="content">
+            <header>
+              {% block header %}{% endblock %}
+            </header>
+            {% for message in get_flashed_messages() %}
+              <div class="flash">{{ message }}</div>
+            {% endfor %}
+            {% block content %}{% endblock %}
+          </section>
+        </div>
+      </div>
+    </nav>
+  </body>
+</html>
