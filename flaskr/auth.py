@@ -31,9 +31,9 @@ def login_required(view):
 
 def validate_username(username):
     """Validate if the given username is allowed """
-    allowed_usernames = ['Jeramee', 'Fernanda', 'Tarl', 'Donuts']
+    allowed_usernames = ['Jeramee', 'Fernanda', 'Tarl', 'Donuts', 'jeramee', 'fernanda', 'tarl', 'donuts']
     if username not in allowed_usernames:
-        return "The given username is not allowed."
+        return "The given username is not allowed. Only these names are allowed: Jeramee, Fernanda, Tarl, Donuts, jeramee, fernanda, tarl, donuts."
     return None
 
 
