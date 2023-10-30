@@ -1,4 +1,5 @@
 import functools
+
 from flask import Blueprint
 from flask import flash
 from flask import g
@@ -13,7 +14,6 @@ from werkzeug.security import generate_password_hash
 from flaskr.db import get_db
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
-'''bp = Blueprint("blog", __name__, template_folder='templates')'''
 
 
 def login_required(view):
@@ -27,6 +27,14 @@ def login_required(view):
         return view(**kwargs)
 
     return wrapped_view
+
+
+def validate_username(username):
+    """Validate if the given username is allowed """
+    allowed_usernames = ['Jeramee', 'Fernanda', 'Tarl', 'Donuts']
+    if username not in allowed_usernames:
+        return "The given username is not allowed."
+    return None
 
 
 @bp.before_app_request
@@ -46,7 +54,6 @@ def load_logged_in_user():
 @bp.route("/register", methods=("GET", "POST"))
 def register():
     """Register a new user.
-
     Validates that the username is not already taken. Hashes the
     password for security.
     """
@@ -89,14 +96,19 @@ def login():
         password = request.form["password"]
         db = get_db()
         error = None
-        user = db.execute(
-            "SELECT * FROM user WHERE username = ?", (username,)
-        ).fetchone()
 
-        if user is None:
-            error = "Incorrect username."
-        elif not check_password_hash(user["password"], password):
-            error = "Incorrect password."
+        # validate the username
+        error = validate_username(username)
+
+        if error is None:
+            user = db.execute(
+                "SELECT * FROM user WHERE username = ?", (username,)
+            ).fetchone()
+
+            if user is None:
+                error = "Incorrect username."
+            elif not check_password_hash(user["password"], password):
+                error = "Incorrect password."
 
         if error is None:
             # store the user id in a new session and return to the index
@@ -114,3 +126,4 @@ def logout():
     """Clear the current session, including the stored user id."""
     session.clear()
     return redirect(url_for("index"))
+

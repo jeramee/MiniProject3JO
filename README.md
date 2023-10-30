@@ -9,13 +9,20 @@ Just a page for Fernanda. Only plan to put basic rubric for class but later expa
 
 ## Pip install instructions
 
-Please run the following:
+### Please run the following:
 ```
 pip install -r requirements.txt
 ```
 
-## How to run
-In a terminal window, please type the following:
+### Install Flaskr:
 ```
-python main.py
+    $ pip install -e .
 ```
+
+### Run
+```
+    $ flask --app flaskr init-db
+    $ flask --app flaskr run --debug
+```
+
+Open http://127.0.0.1:5000 in a browser.
